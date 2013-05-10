@@ -15,7 +15,7 @@ def query(env, question):
         result = Result(StringIO(data))
         for pod in result.pods:
             if pod.id == 'Result':
-                env.msg("%s, the answer seems to be: %s" % (env.user.name, pod.text))
+                env.msg("%s, %s" % (env.user.name, pod.text))
                 return
         env.msg("%s, couldn't find an answer, sorry!" % env.user.name)
 
@@ -35,7 +35,6 @@ def message(env, message):
     if message.lower().startswith(env.app.name.lower()):
         rest = pattern.sub('', message[len(env.app.name):])
         query(env, rest)
-        env.msg("%s, let me look that up" % env.user.name)
 
 def register(app, conf):
     plugin = app.add_plugin('WolframAlpha')
